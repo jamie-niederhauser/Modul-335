@@ -1,0 +1,24 @@
+<div id="container">
+  <h1>Wähle deine Pizza</h1>
+  <ion-radio-group value="Margherita" [(ngModel)]="pizza">
+    <ion-radio value="Margherita" >Margherita</ion-radio><br />
+    <ion-radio value="Salami">Salami</ion-radio><br />
+    <ion-radio value="Prosciutto">Prosciutto</ion-radio><br />
+    <ion-radio value="Funghi">Funghi</ion-radio>
+  </ion-radio-group>
+<p></p>
+
+  <ion-button (click)="berechnePreis()">Speichern</ion-button>
+
+  <p>Deine Auswahl ist: {{pizza}}</p>
+  <p>Preis: {{preis}} </p>
+  <ion-button (click)="getCurrentPosition()">Bestellen</ion-button>
+  <ion-list>
+    <ion-item>
+      {{latitude}},{{longitude}}
+    </ion-item>
+  </ion-list>
+
+</div>
+
+
