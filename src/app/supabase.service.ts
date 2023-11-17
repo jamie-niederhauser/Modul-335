@@ -35,6 +35,8 @@ export class SupabaseService {
         longitude: order.longitude
       })
 
+      .select('*')
+      .single();
     return data
 }
 }

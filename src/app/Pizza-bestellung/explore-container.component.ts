@@ -14,11 +14,7 @@ import { Order } from 'src/data/order';
 })
 export class ExploreContainerComponent implements OnInit {
   @Input() name?: string;
-  pizza = "";
-   preis = 0;
 
-   latitude: number = 0
-   longitude : number = 0
 
    order : Order = new Order()
 
@@ -31,34 +27,34 @@ export class ExploreContainerComponent implements OnInit {
 
    getCurrentPosition = async () => {
     const position = await this.geolocationService.printCurrentPosition()
-    this.latitude = position.coords.latitude
-    this.longitude = position.coords.longitude
+    this.order.latitude = position.coords.latitude
+    this.order.longitude = position.coords.longitude
   }
   
 
   berechnePreis( ) { 
     // Überprüfe den ausgewählten Pizzatyp und weise den entsprechenden Preis zu
-    switch (this.pizza) {
+    switch (this.order.pizza) {
       case 'Margherita':
-        this.preis = 20;
+        this.order.preis = 20;
         console.log('tes')
-        return this.preis;
+        return this.order.preis;
         break;
       case 'Salami':
-        this.preis = 25; // Annahme: Preis für Salami
-        return this.preis;
+        this.order.preis = 25; // Annahme: Preis für Salami
+        return this.order.preis;
         break;
       case 'Prosciutto':
-        this.preis = 22; // Annahme: Preis für Prosciutto
-        return this.preis;
+        this.order.preis = 22; // Annahme: Preis für Prosciutto
+        return this.order.preis;
         break;
       case 'Funghi':
-        this.preis = 18; // Annahme: Preis für Funghi
-        return this.preis;
+        this.order.preis = 18; // Annahme: Preis für Funghi
+        return this.order.preis;
         break;
       default:
         console.log('Ungültiger Pizzatyp ausgewählt');
-        return this.preis; // Verlasse die Methode, wenn der Pizzatyp ungültig ist
+        return this.order.preis; // Verlasse die Methode, wenn der Pizzatyp ungültig ist
     }
 
   }
@@ -66,7 +62,6 @@ export class ExploreContainerComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
-    this.createData()
       }
 
 
@@ -77,7 +72,7 @@ export class ExploreContainerComponent implements OnInit {
     console.log(this.orders)
   }
 
-  createData = async ( ) => {
+  createData = async () => {
     let order = await this.supabase.createFood(this.order)
     this.order = order!
 
