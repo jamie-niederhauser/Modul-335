@@ -8,17 +8,11 @@
   </ion-radio-group>
 <p></p>
 
-  <ion-button (click)="berechnePreis()">Speichern</ion-button>
+  <ion-button (click)="berechnePreis();getCurrentPosition()">Speichern</ion-button>
 
   <p>Deine Auswahl ist: {{order.pizza}}</p>
   <p>Preis: {{order.preis}} </p>
-  <ion-button (click)="getCurrentPosition(); createData()">Bestellen</ion-button>
-  <ion-list>
-    <ion-item>
-      {{order.latitude}},{{order.longitude}}
-    </ion-item>
-  </ion-list>
-
+  <ion-button (click)=" createData()">Bestellen</ion-button>
 </div>
 
 
