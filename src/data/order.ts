@@ -4,4 +4,5 @@ export class Order {
   public preis : number = 0
   public latitude : number = 0
   public longitude : number = 0
+  public base64    : string = ''
 }

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { GeolocationServiceService } from '../geolocation-service.service';
-import { SupabaseService } from '../supabase.service';
+import { GeolocationServiceService } from 'src/services/geolocation-service.service'; 
+import { SupabaseService } from 'src/services/supabase.service';
 import { Order } from 'src/data/order';
 
 @Component({

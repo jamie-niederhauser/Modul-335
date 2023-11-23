@@ -3,6 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 import { ExploreContainerComponent } from '../Pizza-bestellung/explore-container.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { pizza } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab1',

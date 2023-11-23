@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -12,27 +12,30 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 })
 export class PhotoComponent  implements OnInit {
 
+  @Output() pictureTaken = new EventEmitter<string>();
+  imageUrl : string | undefined
+
+  async takePicture() {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Camera,
+        quality: 100,
+      });
+      return image.base64String;
+      this.imageUrl = image.webPath;
+    } catch (error) {
+      console.error('Error capturing picture', error);
+      return undefined;
+    }
+  }
+
   constructor() { }
 
-  imageUrl : string | undefined
+ 
 
   ngOnInit() {}
 
-  takePicture = async () => {
-
-    // const permissionStatus = await Camera.requestPermissions()
-
-    // console.log(permissionStatus)
-
-    const image = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-
-    this.imageUrl = image.webPath;
-
-  };
 
   resetPicture () {
     this.imageUrl = ''

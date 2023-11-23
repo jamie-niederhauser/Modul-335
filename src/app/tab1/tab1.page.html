@@ -12,6 +12,8 @@
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="photo?.url; else error">Successful</div>
+  <ng-template #error>Error</ng-template>
 
   <app-explore-container></app-explore-container>
 </ion-content>
