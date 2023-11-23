@@ -24,7 +24,7 @@ export class SupabaseService {
     return data
   }
 
-  async createFood(order : Order) {
+  async createOrder(order : Order) {
 
     const {data, error} = await this.supabase
       .from('Orders')
@@ -39,4 +39,16 @@ export class SupabaseService {
       .single();
     return data
 }
+
+async deleteOrder (order: Order) {
+  const {data, error} = await this.supabase
+    .from('Orders')
+    .delete()
+    .eq('id', order.id)
+    .select()
+
+  return data
+}
+
+
 }

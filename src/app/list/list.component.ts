@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { SupabaseService } from 'src/services/supabase.service';
 import { Order } from 'src/data/order';
 import { CommonModule } from '@angular/common';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ListComponent  implements OnInit {
 
-  orders : Array<any> | undefined = []
+  orders : Array<Order> | null = []
+  
 
   constructor(
     private supabase : SupabaseService
@@ -29,6 +31,30 @@ export class ListComponent  implements OnInit {
     this.orders = orders!
 
     console.log(this.orders)
+  }
+
+  delete (order: Order) {
+    this.supabase.deleteOrder(order)
+      .then(payload =>  {
+        this.supabase.getOrders()
+          .then(data => {
+            this.orders = data
+          })
+      })
+  }
+
+  async scheduleNotifications() {
+
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: 'Ihr Essen wurde ausgeliefert',
+          body: 'Guten Appetit wünschen wir ihnen',
+          id: 1,
+          schedule: { at: new Date(Date.now() + 1000), allowWhileIdle: true },
+        },
+      ],
+    });
   }
 
 }

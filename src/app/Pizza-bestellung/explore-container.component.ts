@@ -4,13 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import { GeolocationServiceService } from 'src/services/geolocation-service.service'; 
 import { SupabaseService } from 'src/services/supabase.service';
 import { Order } from 'src/data/order';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-explore-container',
   templateUrl: './explore-container.component.html',
   styleUrls: ['./explore-container.component.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule]
+  imports: [IonicModule, FormsModule, CommonModule]
 })
 export class ExploreContainerComponent implements OnInit {
   @Input() name?: string;
@@ -73,7 +74,7 @@ export class ExploreContainerComponent implements OnInit {
   }
 
   createData = async () => {
-    let order = await this.supabase.createFood(this.order)
+    let order = await this.supabase.createOrder(this.order)
     this.order = order!
 
     console.log(this.order)

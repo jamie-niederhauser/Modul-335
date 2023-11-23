@@ -16,7 +16,7 @@ import { image } from 'ionicons/icons';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
-  imports: [ IonicModule, FormsModule, PhotoComponent],
+  imports: [ IonicModule, FormsModule, PhotoComponent, ],
 })
 export class Tab3Page implements OnInit {
   @ViewChild(PhotoComponent) cameraComponent: PhotoComponent | undefined;
@@ -47,7 +47,7 @@ export class Tab3Page implements OnInit {
           .takePicture()
           .then((content: string | undefined) => {
             if (this.photo && content) {
-              this.photo.base64 = content;
+              this.photo.url = content;
               this.sendImageMessage();
             }
           })
@@ -78,10 +78,10 @@ export class Tab3Page implements OnInit {
   async sendImageMessage() {
     let id = this.uuidv4();
     let file = `public/${id}.png`;
-    console.log(decode(this.photo?.base64 || ''));
+    console.log(decode(this.photo?.url || ''));
     let { data: fileData } = await this.client.storage
-      .from('images')
-      .upload(file, decode(this.photo?.base64 || ''), {
+      .from('image')
+      .upload(file, decode(this.photo?.url || ''), {
         contentType: 'image/png',
       });
 
@@ -89,10 +89,10 @@ export class Tab3Page implements OnInit {
         return;
       }
       let { data: url } = this.client.storage
-        .from('images')
+        .from('image')
         .getPublicUrl(fileData?.path);
       const { data, error } = await this.client
-        .from('images')
+        .from('image')
         .insert([
           {
             url: url.publicUrl,
