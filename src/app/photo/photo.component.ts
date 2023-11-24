@@ -85,35 +85,13 @@ export class PhotoComponent  implements OnInit {
     });
   }
 
-
- /* @Output() pictureTaken = new EventEmitter<string>();
-  imageUrl : string | undefined
-
-  async takePicture() {
+  async deletePhoto(photo: Photo) {
     try {
-      const image = await Camera.getPhoto({
-        resultType: CameraResultType.Base64,
-        source: CameraSource.Camera,
-        quality: 100,
-      });
-      return image.base64String;
-      this.imageUrl = image.webPath;
+      await this.cameraService.deletePhoto(photo);
+      this.loadPhotos(); // Reload photos after deletion
     } catch (error) {
-      console.error('Error capturing picture', error);
-      return undefined;
+      console.error('Error deleting photo', error);
     }
   }
-
-  constructor() { }
-
  
-
-  ngOnInit() {}
-
-
-  resetPicture () {
-    this.imageUrl = '' 
-  }
-*/
-
 }
