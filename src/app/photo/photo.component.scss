@@ -1,0 +1,18 @@
+.photo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between photos as needed */
+  }
+  
+  .photos {
+    flex: 0 0 calc(50% - 20px); /* Two photos per row, adjust width and gap as needed */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  .photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  }

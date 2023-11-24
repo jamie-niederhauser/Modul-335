@@ -16,6 +16,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 export class ListComponent  implements OnInit {
 
   orders : Array<Order> | null = []
+  order : Order = new Order()
   
 
   constructor(
@@ -42,6 +43,15 @@ export class ListComponent  implements OnInit {
           })
       })
   }
+
+
+  UpdateData (order: Order) {
+    this.supabase.updateOrder(this.order)
+    .then(payload=>{
+    })
+  }
+  
+
 
   async scheduleNotifications() {
 

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { decode } from 'base64-arraybuffer';
 import { image } from 'ionicons/icons';
-
+import { CameraService } from 'src/services/camera.service';
 
 @Component({
   selector: 'app-tab3',
@@ -19,7 +19,22 @@ import { image } from 'ionicons/icons';
   imports: [ IonicModule, FormsModule, PhotoComponent, ],
 })
 export class Tab3Page implements OnInit {
-  @ViewChild(PhotoComponent) cameraComponent: PhotoComponent | undefined;
+ 
+  @ViewChild(PhotoComponent) cameraComponent:
+    | PhotoComponent
+    | undefined;
+
+  constructor(private photoService: CameraService) {}
+
+  ngOnInit(): void {}
+
+  ionViewWillEnter() {
+    // Sie können die Methode takePic direkt in der TakePictureComponent verwenden
+    this.cameraComponent?.initiatePhotoCapture();
+  }
+}
+ 
+ /* @ViewChild(PhotoComponent) cameraComponent: PhotoComponent | undefined;
   private client: SupabaseClient;
 
  
@@ -40,7 +55,7 @@ export class Tab3Page implements OnInit {
     this.takePicture();
   }
 
-  takePicture(): Promise<any> {
+ takePicture(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.cameraComponent) {
         this.cameraComponent
@@ -102,6 +117,6 @@ export class Tab3Page implements OnInit {
   
       return data;
     }
+*/
 
 
-}

@@ -24,6 +24,16 @@ export class SupabaseService {
     return data
   }
 
+  async updateOrder (order: Order) {
+    const {data, error} = await this.supabase
+      .from('Orders')
+      .update(order)
+      .eq('id', order.id)
+      .select()
+
+    return data
+  }
+
   async createOrder(order : Order) {
 
     const {data, error} = await this.supabase

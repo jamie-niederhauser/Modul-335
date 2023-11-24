@@ -1,16 +1,12 @@
 <ion-card>
+  <ion-button fill="clear" (click)="takePic()"> Take new Photo </ion-button>
 
-  <img *ngIf="imageUrl" [src]="imageUrl" />
-
-  <ion-button fill="clear"
-    (click)="takePicture()">
-    Foto von der ausgelieferten Bestellung
-  </ion-button>
-
-  <ion-button fill="clear"
-    *ngIf="imageUrl"
-    (click)="resetPicture()">
+  <ion-button fill="clear" *ngIf="imgSrc" (click)="resetPic()">
     Reset
   </ion-button>
+  <img *ngIf="imgSrc" [src]="imgSrc" />
 
+  <div *ngFor="let photo of photos" class="photos">
+    <img [src]="photo.url" alt="Photo {{ photo.id }}">
+  </div>
 </ion-card>
